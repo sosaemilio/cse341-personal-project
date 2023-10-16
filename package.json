@@ -1,0 +1,11 @@
+{
+  "name": "cse341-personal-project",
+  "version": "1.0.0",
+  "description": "Personal Project BYU-I",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Emilio Sosa",
+  "license": "ISC"
+}
