@@ -1,15 +1,15 @@
 const mongodb = require('../db/connect');
 
-const getMovies = async function (req, res) {
-  const contacts = await mongodb.getDb().db('movies').collection('movies').find({});
+const getActors = async function (req, res) {
+  const contacts = await mongodb.getDb().db('movies').collection('actors').find({});
   contacts.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
   });
 };
 
-const addMovies = async function (req, res) {
-      /* #swagger.parameters['body'] = { 
+const addActors = async function (req, res) {
+    /* #swagger.parameters['body'] = { 
       in: 'body', 
       '@schema': { 
           "required": ["firstName"], 
@@ -32,12 +32,13 @@ const addMovies = async function (req, res) {
           }
       } 
   } */
-  const newMovies = req.body;
+  const newActors = req.body;
   const result = await mongodb
     .getDb()
     .db('movies')
-    .collection('movies')
-    .insertOne(newMovies, (err) => {
+    .collection('actors')
+    .insert(newActors
+      , (err) => {
       if (err) res.status(500).send(err);
     });
 
@@ -45,6 +46,6 @@ const addMovies = async function (req, res) {
 };
 
 module.exports = {
-  addMovies,
-  getMovies
+  getActors,
+  addActors
 };

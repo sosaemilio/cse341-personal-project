@@ -5,6 +5,6 @@ const movieController = require('../controllers/movies');
 router.get('/', movieController.getMovies);
 
 // Add Contact
-router.post('/', movieController.addMovie);
+router.post('/', movieController.addMovies);
 
 module.exports = router;
