@@ -20,15 +20,12 @@ const addActors = async function (req, res) {
             "lastName": {
               "type": "string",
             },
-            "email": { 
+            "nationality": { 
               "type": "string", 
             },
             "birthday": {
               "type": "string",
             },
-            "favoriteColor": {
-              "type": "string",
-            }
           }
       } 
   } */

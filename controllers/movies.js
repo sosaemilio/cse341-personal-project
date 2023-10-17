@@ -12,22 +12,67 @@ const addMovies = async function (req, res) {
       /* #swagger.parameters['body'] = { 
       in: 'body', 
       '@schema': { 
-          "required": ["firstName"], 
+          "required": ["Title"], 
           "properties": { 
-            "firstName": { 
+            "Title": { 
               "type": "string", 
             },
-            "lastName": {
+            "Year": {
               "type": "string",
             },
-            "email": { 
+            "Released": { 
               "type": "string", 
             },
-            "birthday": {
+            "Runtime": {
               "type": "string",
             },
-            "favoriteColor": {
+            "Genre": {
               "type": "string",
+            },
+            "Director": {
+              "type": "string",
+            },
+            "Writer": {
+              "type": "string",
+            },
+            "Actor": {
+              "type": "string",
+            },
+            "Plot": {
+              "type": "string",
+            },
+            "Language": {
+              "type": "string",
+            },
+            "Country": {
+              "type": "string",
+            },
+            "Awards": {
+              "type": "string",
+            },
+            "Poster": {
+              "type": "string",
+            },
+            "Metascore": {
+              "type": "string",
+            },
+            "imdbRating": {
+              "type": "string",
+            },
+            "imdbVotes": {
+              "type": "number",
+            },
+            "imdbID": {
+              "type": "string",
+            },
+            "Type": {
+              "type": "string",
+            },
+            "Response": {
+              "type": "boolean",
+            },
+            "Images": {
+              type: "array",
             }
           }
       } 
