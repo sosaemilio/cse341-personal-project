@@ -34,8 +34,7 @@ const addActors = async function (req, res) {
     .getDb()
     .db('movies')
     .collection('actors')
-    .insert(newActors
-      , (err) => {
+    .insert(newActors, (err) => {
       if (err) res.status(500).send(err);
     });
 
