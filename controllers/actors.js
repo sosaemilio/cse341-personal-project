@@ -1,3 +1,4 @@
+const {ObjectId} = require('mongodb');
 const mongodb = require('../db/connect');
 
 const getActors = async function (req, res) {
@@ -41,7 +42,50 @@ const addActors = async function (req, res) {
   if (result) res.status(201).json(result);
 };
 
+const updateActor = async function (req, res) {
+    /* #swagger.parameters['body'] = { 
+      in: 'body', 
+      '@schema': { 
+          "required": ["firstName"], 
+          "properties": { 
+            "firstName": { 
+              "type": "string", 
+            },
+            "lastName": {
+              "type": "string",
+            },
+            "nationality": { 
+              "type": "string", 
+            },
+            "birthday": {
+              "type": "string",
+            },
+          }
+      } 
+  } */
+  const actorId = new ObjectId(req.params.id);
+  const data = req.body;
+  const result = await mongodb
+    .getDb()
+    .db('movies')
+    .collection('actors')
+    .updateOne({ _id: actorId }, { $set: data });
+  if (result) res.status(204).json(result);
+};
+
+const deleteActor = async function (req, res) {
+  const actorId = new ObjectId(req.params.id);
+  const result = await mongodb
+    .getDb()
+    .db('movies')
+    .collection('actors')
+    .deleteOne({ _id: actorId });
+  if (result) res.status(200).json(result);
+};
+
 module.exports = {
   getActors,
-  addActors
+  addActors,
+  updateActor,
+  deleteActor
 };

@@ -108,6 +108,111 @@
         }
       }
     },
+    "/movies/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "required": [
+                "Title"
+              ],
+              "properties": {
+                "Title": {
+                  "type": "string"
+                },
+                "Year": {
+                  "type": "string"
+                },
+                "Released": {
+                  "type": "string"
+                },
+                "Runtime": {
+                  "type": "string"
+                },
+                "Genre": {
+                  "type": "string"
+                },
+                "Director": {
+                  "type": "string"
+                },
+                "Writer": {
+                  "type": "string"
+                },
+                "Actor": {
+                  "type": "string"
+                },
+                "Plot": {
+                  "type": "string"
+                },
+                "Language": {
+                  "type": "string"
+                },
+                "Country": {
+                  "type": "string"
+                },
+                "Awards": {
+                  "type": "string"
+                },
+                "Poster": {
+                  "type": "string"
+                },
+                "Metascore": {
+                  "type": "string"
+                },
+                "imdbRating": {
+                  "type": "string"
+                },
+                "imdbVotes": {
+                  "type": "number"
+                },
+                "imdbID": {
+                  "type": "string"
+                },
+                "Type": {
+                  "type": "string"
+                },
+                "Response": {
+                  "type": "boolean"
+                },
+                "Images": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api-docs/": {
       "get": {
         "description": "",
@@ -163,6 +268,63 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/actors/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "required": [
+                "firstName"
+              ],
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "nationality": {
+                  "type": "string"
+                },
+                "birthday": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

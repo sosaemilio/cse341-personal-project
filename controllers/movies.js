@@ -89,7 +89,98 @@ const addMovies = async function (req, res) {
   if (result) res.status(201).json(result);
 };
 
+const updateMovie = async function (req, res) {
+      /* #swagger.parameters['body'] = { 
+      in: 'body', 
+      '@schema': { 
+          "required": ["Title"], 
+          "properties": { 
+            "Title": { 
+              "type": "string", 
+            },
+            "Year": {
+              "type": "string",
+            },
+            "Released": { 
+              "type": "string", 
+            },
+            "Runtime": {
+              "type": "string",
+            },
+            "Genre": {
+              "type": "string",
+            },
+            "Director": {
+              "type": "string",
+            },
+            "Writer": {
+              "type": "string",
+            },
+            "Actor": {
+              "type": "string",
+            },
+            "Plot": {
+              "type": "string",
+            },
+            "Language": {
+              "type": "string",
+            },
+            "Country": {
+              "type": "string",
+            },
+            "Awards": {
+              "type": "string",
+            },
+            "Poster": {
+              "type": "string",
+            },
+            "Metascore": {
+              "type": "string",
+            },
+            "imdbRating": {
+              "type": "string",
+            },
+            "imdbVotes": {
+              "type": "number",
+            },
+            "imdbID": {
+              "type": "string",
+            },
+            "Type": {
+              "type": "string",
+            },
+            "Response": {
+              "type": "boolean",
+            },
+            "Images": {
+              type: "array",
+            }
+          }
+      } 
+  } */
+  const movieId = new ObjectId(req.params.id);
+  const data = req.body;
+  const result = await mongodb
+    .getDb()
+    .db('movies')
+    .collection('movies')
+    .updateOne({ _id: movieId }, { $set: data });
+  if (result) res.status(204).json(result);
+}
+
+const deleteMovie = async function (req, res) {
+  const movieId = new ObjectId(req.params.id);
+  const result = await mongodb
+    .getDb()
+    .db('movies')
+    .collection('movies')
+    .deleteOne({ _id: movieId });
+  if (result) res.status(200).json(result);
+}
+
 module.exports = {
   addMovies,
-  getMovies
+  getMovies,
+  updateMovie,
+  deleteMovie
 };
