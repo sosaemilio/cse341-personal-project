@@ -1,27 +1,12 @@
-const { body, validationResult } = require('express-validator');
-const userValidationRules = () => {
-  return [
-    // username must be an email
-    body('username').isEmail(),
-    // password must be at least 5 chars long
-    body('password').isLength({ min: 5 }),
-  ]
-}
+const { check } = require('express-validator');
 
-const validate = (req, res, next) => {
-  const errors = validationResult(req)
-  if (errors.isEmpty()) {
-    return next()
-  }
-  const extractedErrors = []
-  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
-
-  return res.status(422).json({
-    errors: extractedErrors,
-  })
-}
+const actorValidator = [
+  check('firstName', 'First Name is required').not().isEmpty(),
+  check('lastName', 'Last Name is required').not().isEmpty(),
+  check('birthday', 'Birthday date is missing').not().isEmpty(),
+  check('nationality', 'Nationality is missing').not().isEmpty()
+];
 
 module.exports = {
-  userValidationRules,
-  validate,
+  actorValidator
 }
