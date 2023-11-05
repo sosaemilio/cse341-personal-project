@@ -1,11 +1,16 @@
 const mongodb = require('../db/connect');
 
 const getMovies = async function (req, res) {
-  const contacts = await mongodb.getDb().db('movies').collection('movies').find({});
-  contacts.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+  try {
+    const contacts = await mongodb.getDb().db('movies').collection('movies').find({});
+    contacts.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
 };
 
 const addMovies = async function (req, res) {
@@ -77,6 +82,7 @@ const addMovies = async function (req, res) {
           }
       } 
   } */
+  /* ERROR VALIDATION WAS ADDED INSIDE THE FUNCTIONS*/
   const newMovies = req.body;
   const result = await mongodb
     .getDb()
@@ -158,24 +164,33 @@ const updateMovie = async function (req, res) {
           }
       } 
   } */
-  const movieId = new ObjectId(req.params.id);
-  const data = req.body;
-  const result = await mongodb
-    .getDb()
-    .db('movies')
-    .collection('movies')
-    .updateOne({ _id: movieId }, { $set: data });
-  if (result) res.status(204).json(result);
+  try {
+    const movieId = new ObjectId(req.params.id);
+    const data = req.body;
+    const result = await mongodb
+      .getDb()
+      .db('movies')
+      .collection('movies')
+      .updateOne({ _id: movieId }, { $set: data });
+    if (result) res.status(204).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
 }
 
 const deleteMovie = async function (req, res) {
-  const movieId = new ObjectId(req.params.id);
-  const result = await mongodb
-    .getDb()
-    .db('movies')
-    .collection('movies')
-    .deleteOne({ _id: movieId });
-  if (result) res.status(200).json(result);
+  try {
+    const movieId = movieId;
+    const result = await mongodb
+      .getDb()
+      .db('movies')
+      .collection('movies')
+      .deleteOne({ _id: movieId });
+    if (result) res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }
 
 module.exports = {

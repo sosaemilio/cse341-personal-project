@@ -2,11 +2,15 @@ const {ObjectId} = require('mongodb');
 const mongodb = require('../db/connect');
 
 const getActors = async function (req, res) {
-  const contacts = await mongodb.getDb().db('movies').collection('actors').find({});
-  contacts.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+  try {
+    const contacts = await mongodb.getDb().db('movies').collection('actors').find({});
+    contacts.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 const addActors = async function (req, res) {
@@ -30,6 +34,11 @@ const addActors = async function (req, res) {
           }
       } 
   } */
+  if (!req.body) {
+    res.status(400).send({ message: 'Content can not be empty!' });
+    return;
+  }
+  /* Error Validation was done different it was done inside the arrow functions */
   const newActors = req.body;
   const result = await mongodb
     .getDb()
@@ -63,14 +72,18 @@ const updateActor = async function (req, res) {
           }
       } 
   } */
-  const actorId = new ObjectId(req.params.id);
-  const data = req.body;
-  const result = await mongodb
-    .getDb()
-    .db('movies')
-    .collection('actors')
-    .updateOne({ _id: actorId }, { $set: data });
-  if (result) res.status(204).json(result);
+  try {
+    const actorId = new ObjectId(req.params.id);
+    const data = req.body;
+    const result = await mongodb
+      .getDb()
+      .db('movies')
+      .collection('actors')
+      .updateOne({ _id: actorId }, { $set: data });
+    if (result) res.status(204).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 const deleteActor = async function (req, res) {

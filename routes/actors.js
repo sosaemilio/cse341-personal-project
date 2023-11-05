@@ -9,7 +9,7 @@ router.get('/', actorController.getActors);
 router.post('/', validator.actorValidator, actorController.addActors);
 
 // Update Actors
-router.put('/:id', actorController.updateActor);
+router.put('/:id', validator.actorValidator, actorController.updateActor);
 
 // Delete Actors
 router.delete('/:id', actorController.deleteActor);
