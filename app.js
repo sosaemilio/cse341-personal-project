@@ -21,8 +21,9 @@ const config = {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(auth(config));
+app.use(auth(config));
 app.use('/', routes);
+
 
 mongodb.initDb((err) => {
   if (err) {
